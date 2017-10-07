@@ -13,5 +13,8 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('login');
 });
+
+Route::get("/registrar",'UserController@registrar');
+Route::post("/login",'UserController@logear');
