@@ -17,6 +17,8 @@ ClassLoader::addDirectories(array(
 	app_path().'/controllers',
 	app_path().'/models',
 	app_path().'/database/seeds',
+	app_path().'/ext',
+	app_path().'/ext/conekta-php/lib/Conekta.php'
 
 ));
 
@@ -79,3 +81,17 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+require app_path().'/validator.php';
+
+App::missing(function($exception){
+    return Response::view('errors.404', array(), 404);
+});
+
+App::missing(function($exception){
+    return Response::view('errors.503', array(), 503);
+});
+
+//---Estea linea solo es en produccion por la estructura del servidor
+// App::bind('path.public', function() {
+//     return '/home/curiosityweb12/public_html';
+// });

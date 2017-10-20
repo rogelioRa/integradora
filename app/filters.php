@@ -13,7 +13,16 @@
 
 App::before(function($request)
 {
-	//
+    /**************************
+    *
+    * Descommeneted on producction
+    *
+    **************************/
+
+  	// if( ! Request::secure())
+   //  {
+   //      return Redirect::secure(Request::path());
+   //  }
 });
 
 
@@ -43,7 +52,37 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			return Redirect::guest('/');
+		}
+	}
+});
+
+Route::filter('admin', function()
+{
+	if (Auth::user()->rol != "admin")
+	{
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		else
+		{
+			return Redirect::guest('/game');
+		}
+	}
+});
+
+Route::filter('gameallow', function()
+{
+	if (Auth::user()->rol != "admin")
+	{
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		else
+		{
+			return Redirect::guest('/game');
 		}
 	}
 });
@@ -83,8 +122,58 @@ Route::filter('guest', function()
 
 Route::filter('csrf', function()
 {
-	if (Session::token() != Input::get('_token'))
+	if (Session::token() !== Input::get('_token'))
 	{
 		throw new Illuminate\Session\TokenMismatchException;
 	}
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Filters obout the system Curiosity
+|--------------------------------------------------------------------------}
+*/
+
+Route::filter('manage_content',function(){
+   if(!Entrust::can('manage_content')){
+       return View::make('errors.404');
+   }
+});
+
+Route::filter('manage_school_aliance',function(){
+   if(!Entrust::can('manage_school_aliance')){
+       return View::make('errors.404');
+   }
+});
+
+Route::filter('manage_teacher_aliance',function(){
+   if(!Entrust::can('manage_teacher_aliance')){
+       return View::make('errors.404');
+   }
+});
+
+Route::filter('manage_employees',function(){
+   if(!Entrust::can('manage_employees')){
+       return View::make('errors.404');
+   }
+});
+
+Route::filter('child_actions',function(){
+   if(!Entrust::can('child_actions')){
+       return View::make('errors.404');
+   }
+});
+
+Route::filter('only_session',function(){
+    $role = Auth::user()->roles[0]->name;
+    if($role == 'child'){
+        $session_real=User::where('id','=',Auth::user()->id)->select('id_session')->get();
+        if(isset($session_real)){
+            if($session_real[0]->id_session != Session::get('sessionId') ){
+                Auth::logout();
+                return Redirect::to('/');
+            }
+        }
+    }
 });

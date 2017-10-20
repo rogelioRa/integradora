@@ -11,7 +11,20 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', function(){
+	return View::make('home');
 });
+
+Route::get("/categoria",function(){
+	return View::make("categorias");
+});
+
+Route::group(["before"=>"auth"],function(){
+	//solo se podrá acceder a las rutas que esten dentro de aquí
+	//en caso de que el usuario este logeado
+
+});
+
+Route::post("/register","UserController@register");
+Route::post("/login",'LoginController@login');
+Route::get("/logout",'LoginController@logout');
