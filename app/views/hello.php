@@ -10,9 +10,8 @@
 			margin:0;
 			font-family:'Lato', sans-serif;
 			text-align:center;
-			color: #999;
+			
 		}
-
 		.welcome {
 			width: 300px;
 			height: 200px;

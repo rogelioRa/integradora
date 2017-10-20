@@ -27,7 +27,7 @@
           <table id="categorias" class="table table-bordered table-striped table-responsive">
             <thead>
               <tr>
-                <th>Nombre del cuestionario</th>
+                <th>Nombre del cuestionariow</th>
                 <th>Fecha de Creación</th>
                 <th>Última Actualización</th>
                 <th>Acciones</th>
