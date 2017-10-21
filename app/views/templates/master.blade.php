@@ -210,7 +210,7 @@
     {{HTML::script('/libs/validation/additional-methods.min.js')}}
     {{HTML::script('/libs/validation/localization/messages_es.js')}}
     <script src="//assets/js/dupont.js" charset="utf-8"></script>
-    <script src="//assets/js/user.js?{{rand()}}"></script>
+    <script src="/scripts/login.js?{{rand()}}"></script>
 
         <script>
             //Animation init

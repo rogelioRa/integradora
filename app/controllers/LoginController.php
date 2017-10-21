@@ -7,7 +7,7 @@ class LoginController extends BaseController {
 			$data = Input::all();
 			//return $data;
 			$credenciales = [
-				"email"=> $data["email"],
+				"username"=> $data["username"],
 				"password"=>$data["password"],
 				"active"=>1
 			];
@@ -20,7 +20,7 @@ class LoginController extends BaseController {
 
 	private function logear($credenciales){
 		if(Auth::attempt($credenciales)){
-			return Response::json(array("status" => "200", 'statusMessage' => "success",'message'=>'Bienvenido '.$credenciales["email"]));
+			return Response::json(array("status" => "200", 'statusMessage' => "success",'message'=>'Bienvenido '.$credenciales["username"]));
 		}else return Response::json(array("status"=>'D-106',"statusMessage"=>"warning","message"=>'Credenciales incorrectas'));
 	}
 }

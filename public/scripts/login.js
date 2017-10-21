@@ -1,80 +1,62 @@
 $(function(){
-
-  $(".btn-inAccess, #r-btnLogin").click(function(){
-    $("#modalReg").modal('hide');
-    $("#modalAccess").modal('show');
-  });
-
-  $("#btnRegister").click(function(){
-    $("#modalAccess").modal('hide');
-    $("#modalReg").modal('show');
-  });
-
-  $("#btnLogin").click(function(){
-    let correo = $("#correo").val();
-    let pass = $("#pass").val();
-    if (correo.trim() != "" && pass.trim() != ""){
+  var $frmR = $("#frm-register");
+  $("#frm-register").submit(function(event){
+    event.preventDefault();
+    if($("#nombre").val() == "" || $("#apellidos").val()=="" || $("email-r").val()==""){
+      toastr.info("Favor de llenar todos los campos");
+    }else{
+      data = {
+        nombre: $("#nombre").val(),
+        apellidos: $("#apellidos").val(),
+        password: $("#pass-r").val(),
+        email : $("#email").val(),
+        username : $("#username-r").val()
+      }
       $.ajax({
-        url: '/login',
-        type: 'POST',
-        data: {
-          email: correo.trim(),
-          cotrasenia: pass.trim()
+        url:"/register",
+        method:"POST",
+        data: data
+      }).done(function(response){
+        if(response.status=="200"){
+          toastr.success(response.message+', ahora puedes iniciar sesion',"Registro completado.");
+          $("#btn-close").trigger("click");
+          $frmR[0].reset();
+          setTimeout(function(){
+              document.location = "/";
+          },3500)
+
+          //Document.getElementById('frm-register').reset();
+        }else if(response.status=="401-D"){
+          console.log(response);
+          $.each(response.data,function(object,value){
+            toastr.info(value);
+          });
         }
-      })
-      .done(function(res){
-        switch (res.status) {
-          case '200':
-            window.location = "/admin/secciones";
-            break;
-          case '403':
-            alertify.alert('Los datos ingresados no coinciden');
-            break;
-        }
-        console.log(res);
-      })
-      .fail(function(err){
-        alertify.error("Algo va mal");
-        console.log(err);
+      }).fail(function(error){
+        console.error(error);
       });
     }
-    else {
-      alertify.alert("Es necesario que ingreses todos los datos");
-    }
   });
-
-  $("#r-accept").click(function(){
-    let correo = $("#r-correo").val();
-    let pass = $("#r-pass").val();
-    let name = $("#r-name").val();
-    if (correo.trim() != "" && pass.trim() != "" && name != ""){
-      $.ajax({
-        url: '/register',
-        type: 'POST',
-        data: {
-          nombre: name,
-          email: correo.trim(),
-          cotrasenia: pass.trim()
-        }
-      })
-      .done(function(res){
-        switch (res.status) {
-          case '401':
-            alertify,alert('El usuario ya existe, inicia sesión o intenta con otro correo');
-            break;
-          case '200':
-            window.location.reload();
-            break;
-        }
-        console.log(res);
-      })
-      .fail(function(err){
-        console.log(err);
-      });
-    }
-    else {
-      alertify.alert("Es necesario que ingreses todos los datos");
-    }
+  $("#frm-login").submit(function(event){
+    event.preventDefault();
+    data = {
+      username: $("#username").val(),
+      password:  $("#pass").val()
+    };
+    $.ajax({
+      url:"/login",
+      method:"POST",
+      data:data
+    }).done(function(response){
+      if(response.status=="200"){
+        toastr.success(response.message,"Audiso:");
+        $("#btn-close").trigger("click");
+        document.location = "/empresas";
+      }else if(response.status=="D-106"){
+        toastr.info("email o contraseña incorrectos");
+      }
+    }).fail(function(error){
+      console.error(error);
+    });
   });
-
 });

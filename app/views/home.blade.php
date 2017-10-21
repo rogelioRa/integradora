@@ -66,20 +66,23 @@
 
                                         <!--Body-->
                                         <div class="modal-body mb-1">
+                                          <form id="frm-login">
+
                                             <div class="md-form form-sm">
                                                 <i class="fa fa-envelope prefix"></i>
-                                                <input type="text" id="form11" class="form-control">
-                                                <label for="form11">Your email</label>
+                                                <input type="text" id="username" class="form-control">
+                                                <label for="username">Username</label>
                                             </div>
 
                                             <div class="md-form form-sm">
                                                 <i class="fa fa-lock prefix"></i>
-                                                <input type="password" id="form12" class="form-control">
-                                                <label for="form12">Your password</label>
+                                                <input type="password" id="pass" class="form-control">
+                                                <label for="pass"> password</label>
                                             </div>
                                             <div class="text-center mt-2">
                                                 <button class="btn btn-info waves-effect waves-light">Log in <i class="fa fa-sign-in ml-1"></i></button>
                                             </div>
+                                          </form>
                                         </div>
                                         <!--Footer-->
                                         <div class="modal-footer display-footer">
@@ -98,28 +101,48 @@
 
                                         <!--Body-->
                                         <div class="modal-body">
+                                          <form id=frm-register>
+
                                             <div class="md-form form-sm">
                                                 <i class="fa fa-envelope prefix"></i>
-                                                <input type="text" id="form13" class="form-control">
-                                                <label for="form13">Your email</label>
+                                                <input type="text" id="email" class="form-control">
+                                                <label for="email">Your email</label>
+                                            </div>
+
+                                            <div class="md-form form-sm">
+                                                <i class="fa fa-envelope prefix"></i>
+                                                <input type="text" id="username-r" class="form-control">
+                                                <label for="username-r">username</label>
+                                            </div>
+
+                                            <div class="md-form form-sm">
+                                                <i class="fa fa-envelope prefix"></i>
+                                                <input type="text" id="nombre" class="form-control">
+                                                <label for="nombre">Nombre</label>
+                                            </div>
+
+                                            <div class="md-form form-sm">
+                                                <i class="fa fa-envelope prefix"></i>
+                                                <input type="text" id="apellidos" class="form-control">
+                                                <label for="apellidos">apellidos</label>
                                             </div>
 
                                             <div class="md-form form-sm">
                                                 <i class="fa fa-lock prefix"></i>
-                                                <input type="password" id="form14" class="form-control">
-                                                <label for="form14">Your password</label>
+                                                <input type="password" id="pass-r" class="form-control">
+                                                <label for="pass-r">Your password</label>
                                             </div>
 
                                             <div class="md-form form-sm">
                                                 <i class="fa fa-lock prefix"></i>
-                                                <input type="password" id="form15" class="form-control">
-                                                <label for="form15">Repeat password</label>
+                                                <input type="password" id="password-rep" class="form-control">
+                                                <label for="password-rep">Repeat password</label>
                                             </div>
 
                                             <div class="text-center form-sm mt-2">
-                                                <button class="btn btn-info waves-effect waves-light">Sign up <i class="fa fa-sign-in ml-1"></i></button>
+                                                <button type="submit" class="btn btn-info waves-effect waves-light">Sign up <i class="fa fa-sign-in ml-1"></i></button>
                                             </div>
-
+                                          </form>
                                         </div>
                                         <!--Footer-->
                                         <div class="modal-footer">

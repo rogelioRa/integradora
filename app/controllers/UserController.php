@@ -8,8 +8,10 @@ class UserController extends BaseController {
 			$data = Input::all();
 			$rules = [
 				"email" 		=> "required|email|unique:users",
-				"nombre"		=>"required",
-				"apellidos"	=>"required"
+				"username"	=> "required|unique:users",
+				"nombre"		=> "required",
+				"password"  => "required",
+				"apellidos"	=> "required"
 			];
 			$messages = [
 				"required" => "El campo :attribute es requerido.",
@@ -21,7 +23,8 @@ class UserController extends BaseController {
 				return UserController::VALID_ERROR($validacion->messages());
 			}else{
 				$user = new User($data);
-				$user->password = Hash::make("NuestrosValores");
+				$user->username = $data["username"];
+				$user->password = Hash::make($data["password"]);
 				$user->active = 1;
 				//$user->active = 0;
 				$user->save();

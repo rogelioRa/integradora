@@ -11,12 +11,11 @@
 |
 */
 
-<<<<<<< HEAD
 Route::get('/', function(){
 	return View::make('home');
 });
 
-Route::get("/categoria",function(){
+Route::get("/empresas",function(){
 	return View::make("categorias");
 });
 
@@ -29,12 +28,3 @@ Route::group(["before"=>"auth"],function(){
 Route::post("/register","UserController@register");
 Route::post("/login",'LoginController@login');
 Route::get("/logout",'LoginController@logout');
-=======
-Route::get('/', function()
-{
-	return View::make('login');
-});
-
-Route::get("/registrar",'UserController@registrar');
-Route::post("/login",'UserController@logear');
->>>>>>> 183e9c200334798cb6cd42d60fd56eec268a390c
