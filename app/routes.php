@@ -25,6 +25,9 @@ Route::group(["before"=>"auth"],function(){
 
 });
 
+Route::post("/saveEmpresa","EmpresaController@registrarEmpresa");
+Route::post("/saveDepartamento","DepartamentoController@registrarDepartamento");
+Route::get("/departamentos/{id}","DepartamentoController@mostrar");
 Route::post("/register","UserController@register");
 Route::post("/login",'LoginController@login');
 Route::get("/logout",'LoginController@logout');

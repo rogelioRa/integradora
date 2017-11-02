@@ -18,7 +18,7 @@
           <div class="pull-right">
             <button type="button" name="conf-in" class="btn btn-success conf-display">
               <span class="fa fa-plus"></span>&nbsp;
-              Nuevo Empresa
+              Nuevo Departamento
             </button>
           </div>
           <br>
@@ -35,12 +35,12 @@
               </tr>
             </thead>
             <tbody>
-              @foreach(Empresa::where("active","=","1")->get() as $empresa)
+              @foreach($departamentos as $departamento)
               <tr>
-                <td>{{$empresa->nombre}}</td>
-                <td>{{$empresa->descripcion}}</td>
-                <td>{{$empresa->created_at}}</td>
-                <td>{{$empresa->updated_at}}</td>
+                <td>{{$departamento->nombre}}</td>
+                <td>{{$departamento->descripcion}}</td>
+                <td>{{$departamento->created_at}}</td>
+                <td>{{$departamento->updated_at}}</td>
                 <td>
                   <center>
                     <button type="button" name="categoria-edit" class="btn btn-info btn-inline-block" title="Editar" data-val="">
@@ -49,7 +49,7 @@
                     <button type="button" name="categoria-del" class="btn btn-danger btn-inline-block" title="Eliminar" data-val="">
                       <span class="fa fa-trash"></span>
                     </button>
-                    <a href="/departamentos/{{$empresa->id}}" name="categoria-in" class="btn btn-primary btn-inline-block" title="Ingresar">
+                    <a href="/admin/producto/" name="categoria-in" class="btn btn-primary btn-inline-block" title="Ingresar">
                       <span class="fa fa-arrow-right"></span>
                     </a>
                   </center>
@@ -70,14 +70,14 @@
 
         <div class="box-header">
           <h3 class="box-title">
-            Agregar nueva empresa
+            Agregar nueva departamento
           </h3>
         </div>
 
         <div class="box-body">
           <form name="form-section">
             <div class="form-group">
-              <label>Nombre de la empresa</label>
+              <label>Nombre de la departamento</label>
               <input type="text" name="nombre" id="nombre" class="form-control" autofocus>
             </div>
             <div class="form-group">
@@ -88,6 +88,7 @@
               <label>Correo</label>
               <input type="email" name="correo" id="correo" class="form-control" autofocus>
             </div>
+            <input type="hidden" id="empresa_id" value="{{$empresa_id}}">
           </form>
           <form name="form-imagen" hidden="hidden" id="form-imagen">
             <input type="file" name="imagen" id="imagen">
@@ -138,5 +139,5 @@
   <script src="/libs/datatables/dataTables.bootstrap.min.js"></script>
   <script src="/libs/tinymce/js/tinymce/tinymce.min.js" charset="utf-8"></script>
   <!-- <script src="/scripts/catalogo/categoria.js" charset="utf-8"></script> -->
-  <script src="/assets/js/empresas.js" charset="utf-8"></script>
+  <script src="/assets/js/departamentos.js" charset="utf-8"></script>
 @stop
